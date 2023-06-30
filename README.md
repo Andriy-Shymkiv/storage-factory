@@ -2,7 +2,8 @@
 
 This is part of the FreeCodeCamp Solidity & Javascript Blockchain Course.
 
-Video Link : ⌨️ [(05:30:42) Lesson 5: Ethers.js Simple Storage](https://www.youtube.com/watch?v=gyMwXuJrbJQ&t=19842s)
+Video Link : *[⌨️ (05:30:42) Lesson 5: Ethers.js Simple Storage](https://www.youtube.com/watch?v=gyMwXuJrbJQ&t=19842s)*
+
 
 # Getting Started
 
@@ -44,11 +45,13 @@ Then install dependencies
 yarn
 ```
 
+> Note: You'll notice in our `package.json` we are using `"solc": "0.8.7-fixed"`. Usually, you'll just be able to do `"solc": "0.8.7"` to get a specific version, but there was a bit of an issue with that one... You'll find out why we use 0.8.7
+
 ### Typescript
 
-If you like `typescript`, run `git checkout typescript` then run `npm install`.
+If you like `typescript`, run `git checkout typescript` then run `yarn`
 
-## Useage
+## Usage
 
 1. Run your ganache local chain, by hitting `quickstart` on your ganache application
 
@@ -74,30 +77,39 @@ RPC_URL=http://0.0.0.0:8545
 
 PRIVATE_KEY=11ee3108a03081fe260ecdc106554d09d9d1209bcafd46942b10e02943effc4a
 
-4. Compile your Solidity code
+4. Compile your code
 
 Run
 
 ```
-yarn hardhat compile
+yarn compile
 ```
 
 You'll see files `SimpleStorage_sol_SimpleStorage.abi` and `SimpleStorage_sol_SimpleStorage.bin` be created.
 
-5. Compile your Typescript code to Javascript
-
-```
-tsc deploy.ts
-```
-
-6. Run your javascript code
+5. Run your application
 
 ```
 node deploy.js
 ```
+### For WSL users
 
-You could also just do `npx ts-node deploy.ts` if you are using npm.
-For yarn use `yarn ts-node deploy.ts`.
+1. Run
+```
+yarn add ganache
+```
+
+2. Change Server settings in Ganache
+
+Settings > Server > Host Name 
+
+Change Host Name to vEthernet (WSL)
+
+3. Run your application 
+
+``` 
+node deploy.js
+```
 
 ### Deploying to a testnet
 
@@ -111,15 +123,47 @@ USE A METAMASK THAT DOESNT HAVE ANY REAL FUNDS IN IT. Just in case you accidenta
 
 2. Go to [Alchemy](https://alchemy.com/?a=673c802981) and create a new project on the testnet of choice (ie, Sepolia)
 3. Grab your URL associated with the testnet, and place it into your `.env` file.
-4. Make sure you have [testnet ETH](https://faucets.chain.link/) in your account. You can [get some here.](https://faucets.chain.link/). You should get testnet ETH for the same testnet that you made a project in Alchemy (ie, Sepolia)
+4. Make sure you have [testnet ETH](https://faucets.chain.link/) in your account. You can [get some here](https://faucets.chain.link/). You should get testnet ETH for the same testnet that you made a project in Alchemy (ie, Sepolia)
 5. Run
 
 ```
 node deploy.js
 ```
+---
 
-### Typescript Differences
+> Troubleshooting: Ethers 6.X.X instability
 
-1. We installed `@types/fs-extra` and `@types/node`
-2. We have a `tsconfig.json` file
-3. We have to compile our ts code and then run our js code
+```js
+const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL)
+                                      ^
+
+TypeError: Cannot read properties of undefined (reading 'JsonRpcProvider')
+```
+If you are experiencing issues with the latest version of Ethers, ethers ^6.0.2, which appears to be unstable, you can easily solve the problem by downgrading to a previous version of Ethers, such as ethers 5.7.2.
+
+To downgrade to ethers 5.7.2, run either of the following commands on your command line interface, depending on your package manager:
+
+For npm:
+
+```
+npm install ethers@5.7.2
+```
+
+For yarn:
+
+```
+yarn add ethers@5.7.2
+```
+
+---
+
+# Thank you!
+
+If you appreciated this, feel free to follow me or donate!
+
+ETH/Polygon/Avalanche/etc Address: 0x9680201d9c93d65a3603d2088d125e955c73BD65
+
+[![Patrick Collins Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/PatrickAlphaC)
+[![Patrick Collins YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/channel/UCn-3f8tw_E1jZvhuHatROwA)
+[![Patrick Collins Linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/patrickalphac/)
+[![Patrick Collins Medium](https://img.shields.io/badge/Medium-000000?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@patrick.collins_58673/)
